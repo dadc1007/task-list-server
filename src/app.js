@@ -1,28 +1,13 @@
 const express = require("express");
+const listViewRouter = require("./list-view-router");
+const listEditRouter = require("./list-edit-router");
 const app = express();
 const PORT = 3000;
 
-app.get("/tasks", (req, res) => {
-  const tasks = [
-    {
-      id: 123456,
-      isCompleted: false,
-      description: "Walk the dog",
-    },
-    {
-      id: 234567,
-      isCompleted: true,
-      description: "Buy groceries",
-    },
-    {
-      id: 345678,
-      isCompleted: false,
-      description: "Finish homework",
-    },
-  ];
+app.use(express.json());
 
-  res.json(tasks);
-});
+app.use(listViewRouter);
+app.use(listEditRouter);
 
 const server = app.listen(PORT, () => {
   console.log(`listening on port http://localhost:${PORT}`);
